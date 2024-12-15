@@ -17,9 +17,10 @@ function GLTFModel({ modelPath, position = [0, 0, 0], scale = 1 }) {
   gltf.scene.traverse((child) => {
     if (child.isMesh) {
       child.material = new THREE.MeshStandardMaterial({
-        color: 0x000000,    // 设置基础颜色
-        metalness: 1.5,       // 完全金属感
-        roughness: 0.1,     // 设置粗糙度
+        color: 0x303030,    // 设置基础颜色
+        emissive: 0x333333, // 设置自发光颜色
+        metalness: 1,       // 完全金属感
+        roughness: 0.14,     // 设置粗糙度
         envMapIntensity: 1.5, // 控制环境贴图的强度
       });
     }
@@ -41,10 +42,10 @@ export default function Home() {
 
 
 return (
-  <div className="canvasContainer">
+  <div className="canvasContainer" >
     
 
-    <Canvas camera={{ position: [0, 0, 15] }} style={{ height: '100%'}}>
+    <Canvas camera={{ position: [0, 0, 15] }} style={{ height: '100%'}} alpha={false}>
 
     <GLTFModel modelPath="/model/ring5.gltf" position={[0, 9, 0]} scale={0.8} />
 
@@ -62,7 +63,7 @@ return (
       <directionalLight color="white" position={[1, 3, 5]} />
                 
       <OrbitControls enableZoom={true}  />
-      <color attach="background" args={['lightgray']} />
+      {/* <color attach="background" args={['lightgray']} /> */}
       <Environment preset="forest" background={false} ground={false} />
    </Canvas>
      
