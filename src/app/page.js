@@ -37,7 +37,7 @@ function GLTFModel({ modelPath, position = [0, 0, 0], scale = 1 }) {
 }
 
 export default function Home() {
-const [active, setActive] = useState(false);
+
 
 
 return (
