@@ -108,7 +108,7 @@ export default function Home() {
     <div className="canvasContainer">
       
 
-      <Canvas camera={{ position: [0, 5, 10] }} style={{ height: '100%'}}>
+      <Canvas camera={{ position: [0, 5, 10] }} style={{ height: '100%'}} alpha={false}>
 
       
        
