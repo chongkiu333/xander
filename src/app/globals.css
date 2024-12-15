@@ -40,3 +40,8 @@ a {
     color-scheme: dark;
   }
 }
+
+.canvasContainer{
+  width: 100vw;
+height: 100vh;
+}

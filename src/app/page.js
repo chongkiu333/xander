@@ -1,95 +1,63 @@
+"use client"
 import Image from "next/image";
 import styles from "./page.module.css";
+import * as THREE from "three";
+import { Canvas } from '@react-three/fiber';
+import { Environment,OrbitControls} from '@react-three/drei';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { useLoader } from '@react-three/fiber'
+import { useState } from "react";
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
+
+function Model({ url }) {
+  const obj = useLoader(OBJLoader, url);
+  return <primitive object={obj} scale={0.1} />;
+}
+
+function GLTFModel(){
+  const gltf = useLoader(GLTFLoader, '/model.gltf');
+
+  gltf.scene.traverse((child) => {
+    if (child.isMesh) {
+      child.material = new THREE.MeshStandardMaterial({
+        color: 0x000000,    // 设置基础颜色
+        metalness: 1,       // 完全金属感
+        roughness: 0.2,     // 设置粗糙度
+        envMapIntensity: 1, // 控制环境贴图的强度
+      });
+    }
+  });
+  
+  return <primitive object={gltf.scene} scale={0.6} />;
+}
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [active, setActive] = useState(false);
+  
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  return (
+    <div className={styles.canvaContainer}>
+      
+
+      <Canvas camera={{ position: [0, 0, 40] }} style={{ height: '100%'}}>
+
+        {/* <mesh scale={active ? 1.5 : 1} onPointerEnter={()=>setActive(true)} onPointerLeave={()=>setActive(false)} onClick={()=>alert("Hello World!")}>
+          <boxGeometry args={[10, 10, 10]}/>
+          <meshPhongMaterial color="royalblue" />
+        </mesh> */}
+
+        <GLTFModel />
+                 
+        <ambientLight intensity={2} />
+        <directionalLight color="yellow" position={[1, 3, 5]} />
+                  
+        <OrbitControls enableZoom={true}  />
+        <Environment preset="forest" background />
+     </Canvas>
+       
+    
+
     </div>
   );
 }
