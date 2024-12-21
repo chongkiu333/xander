@@ -45,5 +45,5 @@ a {
 .canvasContainer{
   width: 100vw;
 height: 100vh;
-background: linear-gradient(to bottom, #1a1a1a,#666666, #bf7665,#757575);
+background: linear-gradient(to bottom, #1a1a1a,#666666,#757575);
 }
