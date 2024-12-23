@@ -36,27 +36,6 @@ function LimitedPlane(props) {
 }
 
 
-function Cube({ size = [1, 1, 1],position, rotation = [0, 0, 0],...props  }) {
-  const [ref] = useBox(() => ({
-    type:'Static',
-    mass: 1,                       // 设置物理质量
-    position,                       // 设置位置
-    args: size,                     // 设置碰撞体的大小
-    rotation,            // 设置初始角度
-  }));
-
-  return (
-    <mesh
-      receiveShadow
-      castShadow
-      ref={ref}
-    >
-      {/* 设置渲染网格的大小 */}
-      <boxGeometry args={size} />
-      <meshLambertMaterial color="hotpink" />
-    </mesh>
-  );
-}
 
 function CompoundBody(props) {
   const { size } = useThree();
@@ -68,7 +47,6 @@ function CompoundBody(props) {
     rotation: [0, 0, 0],
     shapes: [
       { type: 'Box', position: [0, -0.3, 0], args: [30, 0.5, 30] }, // 地板
-
       { type: 'Box', position: [-10, 1, 0], args: [1, 4, 20] }, // 第二个立方体
       { type: 'Box', position: [0, 1, -10], args: [20, 4, 1] }, // 第三个立方体
       { type: 'Box', position: [10, 1, 0], args: [1, 4, 20] }, // 第四个立方体
@@ -118,10 +96,6 @@ function CompoundBody(props) {
       rotationRef.current.z
     );
   });
-
-  
-
-
 
   return (
     <group ref={ref} >
