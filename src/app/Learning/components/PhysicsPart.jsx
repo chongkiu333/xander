@@ -394,7 +394,7 @@ export default function PhysicsPart() {
       <ambientLight intensity={10} />
       <directionalLight color="white" position={[1, 3, 5]} />
       <Environment preset="forest" background={false} ground={false} envMapIntensity={0.2} />
-      {/* <OrbitControls enableZoom={true}  /> */}
+      <OrbitControls enableZoom={true}  />
    
       
     
