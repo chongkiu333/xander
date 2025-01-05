@@ -7,6 +7,7 @@ import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import React, { useRef } from 'react';
 import { EffectComposer, Outline , Select , Selection } from "@react-three/postprocessing";
+import styles from './page.module.css';
 
 function GLTFModel({ modelPath, position = [0, 0, 0], scale = 1 }) {
   const gltf = useLoader(GLTFLoader, modelPath);
@@ -47,7 +48,7 @@ export default function Home() {
 return (
   <div className="canvasContainer" >
     
-
+    <div className={styles.title}>XanderGhost</div>
     <Canvas  style={{ height: '100%'}} alpha={false}>
 
       <Selection>
@@ -56,19 +57,19 @@ return (
 
     <OrthographicCamera
         makeDefault // 设置为默认摄像机
-        position={[0, 10, 0]} // 摄像机位置
-        zoom={50} // 调整缩放程度
+        position={[0, 20, 0]} // 摄像机位置
+        zoom={45} // 调整缩放程度
         near={0.1}
         far={1000}
       />
 
 
   
-    {/* <GLTFModel modelPath="/model/ring5.gltf" position={[0, 9, 0]} scale={0.8} /> */}
-    <GLTFModel modelPath="/model/ring1.gltf" position={[0, 8, 0]} scale={1.2} />
-    <GLTFModel modelPath="/model/ring3.gltf" position={[0, 3, 0]} scale={1.2} />
-    <GLTFModel modelPath="/model/ring2.gltf" position={[0, -2, 0]} scale={1.2} />
-    <GLTFModel modelPath="/model/ring4.gltf" position={[0, -8, 0]} scale={1.2} />
+    <GLTFModel modelPath="/model/ring5.gltf" position={[10, 9, -5]} scale={0.8} />
+    <GLTFModel modelPath="/model/ring1.gltf" position={[2, 8, -5]} scale={1} />
+    <GLTFModel modelPath="/model/ring3.gltf" position={[10, 3, 6]} scale={1.2} />
+    <GLTFModel modelPath="/model/ring2.gltf" position={[-3, -2, 4.5]} scale={0.8} />
+    <GLTFModel modelPath="/model/ring4.gltf" position={[-9, -8, -4]} scale={1.2} />
 
       <ambientLight intensity={10} />
       <directionalLight color="white" position={[1, 3, 5]} />

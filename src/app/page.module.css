@@ -1,5 +1,16 @@
 .canvaContainer{
     width: 100vw;
   height: 100vh;
-  background-color: aqua;
+
+}
+
+.title{
+  background-color: aliceblue;
+  position: absolute;
+  font-family:"ABCDiatype";
+  font-weight: 600;
+  padding: 3px 80px 3px 80px;
+  font-size: 15px;
+  border: 0.5px solid black;
+  letter-spacing: -0.7px;
 }

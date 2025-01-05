@@ -14,6 +14,7 @@ function Floors(props) {
   const { nodes: nodes4, materials: materials4 } = useGLTF('/album/galeedi.gltf');
   const { nodes: nodes5, materials: materials5 } = useGLTF('/album/banzeen.gltf');
   const { nodes: nodes6, materials: materials6 } = useGLTF('/album/tamasee7.gltf');
+  const { nodes: nodes7, materials: materials7 } = useGLTF('/album/tamasee7.gltf');
 
   const [sphereref] = useSphere(() => ({ 
     mass: 1, 
