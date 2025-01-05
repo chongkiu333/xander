@@ -125,7 +125,7 @@ return (
     <br/>
     Mirroring the avant-garde essence of his music, the brand transcends conventional norms, seamlessly intertwining fashion and art. A Better Feeling has swiftly risen to prominence, adorning the shelves of esteemed retailers worldwide, including Ssense, Selfridges, Louisa Via Roma, Lncc, Level Shoes, and numerous others.
     <br/>
-    Notably, Xander's creations have captured the attention of a global audience, including acclaimed celebrities such as Travis Scott, Billie Eilish, Rosalia, and Burna Boy. Through his unparalleled fusion of creativity and innovation, Xander Ghost continues to leave an indelible mark on the cultural landscape, inspiring and captivating audiences around the globe.
+    Notably, Xander&apos;s creations have captured the attention of a global audience, including acclaimed celebrities such as Travis Scott, Billie Eilish, Rosalia, and Burna Boy. Through his unparalleled fusion of creativity and innovation, Xander Ghost continues to leave an indelible mark on the cultural landscape, inspiring and captivating audiences around the globe.
     </div>}
 
     </span>
