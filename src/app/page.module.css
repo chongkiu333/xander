@@ -4,9 +4,20 @@
 
 }
 
+.headContainer{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+ 
+}
+
 .title{
   background-color: aliceblue;
-  position: absolute;
+ 
   font-family:"ABCDiatype";
   font-weight: 600;
   padding: 3px 80px 3px 80px;
@@ -14,12 +25,56 @@
   border: 0.5px solid black;
   letter-spacing: -0.7px;
   pointer-events: auto; 
-  z-index: 999;
+ 
+  display: inline-flex;
 
   
 }
+
+.about{
+  width: 302px;
+  margin-top: 10px;
+  font-size: 12px;
+  font-family:"ABCDiatype";
+  font-weight: 500;
+  background-color: aliceblue;
+  border: 0.5px solid black;
+  padding: 5px ;
+ 
+
+}
+
+
+.point{
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+  background-color: orange;
+  border-radius: 100%;
+  transform: translate(25%, 10%);
+}
 .hovered{
   z-index: 999;
+}
+
+.subTitle{
+  font-family:"ABCDiatype";
+  font-weight: 600;
+  font-size: 25px;
+  background-color: white;
+  padding: 3px 10px 3px 10px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 0.5px solid black;
+  transition: all 0.3s ease-in-out;
+
+
+}
+
+.subTitle:hover{
+  background-color: rgb(57, 57, 57);
+  color: white;
+  border: 0.5px solid white;
 }
 
 
