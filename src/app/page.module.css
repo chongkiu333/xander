@@ -13,4 +13,14 @@
   font-size: 15px;
   border: 0.5px solid black;
   letter-spacing: -0.7px;
+  pointer-events: auto; 
+  z-index: 999;
+
+  
 }
+.hovered{
+  z-index: 999;
+}
+
+
+
