@@ -4,11 +4,13 @@ import { Physics, usePlane, useBox ,useCompoundBody , useSphere, useCylinder , u
 import { Environment , OrbitControls , useGLTF , Html} from '@react-three/drei';
 import { useState , useEffect } from "react";
 import React, { useRef } from 'react';
-import { CannonDebugger } from '@react-three/cannon';
+import styles from './PhysicsPart.module.css';
+import Image from "next/image";
+import Link from "next/link";
 
 
 function Floors(props) {
-  const { nodes: nodes1 } = useGLTF('/model/ring2.gltf'); 
+  const { nodes: nodes1 ,materials: materials1 } = useGLTF('/model2/ring3.gltf'); 
   const { nodes: nodes2, materials: materials2 } = useGLTF('/model/gltf2.gltf');
   const { nodes: nodes3, materials: materials3 } = useGLTF('/album/kotshina.gltf');
   const { nodes: nodes4, materials: materials4 } = useGLTF('/album/galeedi.gltf');
@@ -218,21 +220,13 @@ function Floors(props) {
         onPointerUp={handlePointerUp}
       >
         <mesh
-          geometry={nodes1.ring.geometry}
-          scale={[5, 3, 5]}
-          position={[0, 0, 0]}
-          rotation={[0, 0, 0]}
-          castShadow
-          receiveShadow
-        >
-          <meshStandardMaterial 
-            color={"gray"}
-            emissive={"black"}
-            metalness={1}
-            roughness={0.14}
-            envMapIntensity={1.5}
-          />
-        </mesh>
+        castShadow
+        receiveShadow
+        geometry={nodes1.ring.geometry}
+        material={materials1.oil}
+        position={[0.008, -0.2, -0.035]}
+        scale={[5,2.5,5]}
+      />
       </group>
 
       {/* Box */}
@@ -373,18 +367,46 @@ function Box(props){
 
 export default function PhysicsPart() {
   return (
-    <div className="canvasContainer">
+    <div className={styles.canvasContainer}>
     
+    <div className={styles.headContainer}>
+      <Link className={styles.title}  href="/">
+    
+      XanderGhost<div className={styles.point}></div> 
+      
+    </Link>
+    <div className={styles.album}>
+    <div className={styles.albumTitle}><div class={styles.trapezoidRight}></div>17sas Gayed</div>
+    <div className={styles.albumList}>
+      <div>1. Minamela</div>
+      <div>2. Fo2</div>
+      <div>3. Atbaneg</div>
+      <div>4. Asetou</div>
+      <div>5. Maskoun</div>
+      <div style={{height: '80px'}}></div>
 
-    <Canvas camera={{ position: [-1, 20, 40] }}  style={{ height: '100%'}} alpha={false}>
+    </div>
+
+
+    <div className={styles.albumImage}>
+    <Image  className={styles.img} alt='albumimg'  src="/album/1.png" layout="responsive" width={300} height={300} />
+    </div>
+
+
+    </div>
+
+    <div className={styles.player}>Player</div>
+
+    </div>
+    <Canvas camera={{ position: [0, 30, 25] }}  style={{ height: '100%'}} alpha={false}>
 
      
       
       
       <Physics>
-        {/* <Sphere position={[0, 30, 0]} /> */}
         
-        <Floors />
+        
+        <Floors   />
         
 
       </Physics>
@@ -394,7 +416,7 @@ export default function PhysicsPart() {
       <ambientLight intensity={10} />
       <directionalLight color="white" position={[1, 3, 5]} />
       <Environment preset="forest" background={false} ground={false} envMapIntensity={0.2} />
-      <OrbitControls enableZoom={true}  />
+     
    
       
     

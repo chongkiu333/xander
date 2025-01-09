@@ -5,9 +5,10 @@ import { Canvas , useFrame } from '@react-three/fiber';
 import { Environment,OrbitControls , OrthographicCamera ,  Html ,useGLTF} from '@react-three/drei';
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import React, { useRef , useState} from 'react';
+import React, { Suspense, useRef , useState} from 'react';
 import { EffectComposer, Outline , Select , Selection } from "@react-three/postprocessing";
 import styles from './page.module.css';
+import Link from "next/link";
 
 
 function RingModel({modelPath, position,scale=1,text, ...props}){
@@ -41,7 +42,9 @@ function RingModel({modelPath, position,scale=1,text, ...props}){
         distanceFactor={0.01} 
       >
         <div className={styles.subTitle} >
+          <Link href="/Test/music">
           {text}
+          </Link>
         </div>
       </Html>
     </group>
@@ -97,9 +100,9 @@ function RotatingGroup() {
     <group ref={groupRef}>
       {/* 将所有 RingModel 放在同一个 group 中 */}
       <RingModel modelPath="/model2/ring1.gltf" position={[1, 8, -4.5]} text="BackStage" />
-      <RingModel modelPath="/model2/ring2.gltf" position={[10, 4, 6]} scale={1.15} text="CreativeDirection" />
-      <RingModel modelPath="/model2/ring3.gltf" position={[-5, -2, 4.5]} text="Music" />
-      <RingModel modelPath="/model2/ring4.gltf" position={[-11, -8, -5]} scale={2} text="Video" />
+      <RingModel modelPath="/model2/ring2.gltf" position={[10, 4, 8]} scale={1.25} text="CreativeDirection" />
+      <RingModel modelPath="/model2/ring3.gltf" position={[-5, -2,4.5]} scale={1.1} text="Music" />
+      <RingModel modelPath="/model2/ring4.gltf" position={[-11, -8, -6]} scale={2} text="Video" />
     </group>
   );
 }
@@ -132,26 +135,22 @@ return (
      
      </div>
     <Canvas className={styles.canvas}  style={{ height: '100%'}} alpha={false}>
-
+    <Suspense fallback={null}>
       <Selection>
       
       
 
     <OrthographicCamera
         makeDefault // 设置为默认摄像机
-        position={[0, 20, 0]} // 摄像机位置
-        zoom={45} // 调整缩放程度
+        position={[0, 19, 0]} // 摄像机位置
+        zoom={65} // 调整缩放程度
         near={0.1}
         far={1000}
       />
 
 
   
-    {/* <GLTFModel modelPath="/model/ring5.gltf" position={[10, 9, -5]} scale={0.8} />
-    <GLTFModel modelPath="/model/ring1.gltf" position={[2, 8, -5]} scale={1} />
-    <GLTFModel modelPath="/model/ring3.gltf" position={[10, 3, 6]} scale={1.2} />
-    <GLTFModel modelPath="/model/ring2.gltf" position={[-3, -2, 4.5]} scale={0.8} />
-    <GLTFModel modelPath="/model/ring4.gltf" position={[-9, -8, -4]} scale={1.2} /> */}
+    
 
 
 <RotatingGroup />
@@ -162,6 +161,9 @@ return (
    
       <Environment preset="forest" background={false} ground={false}  />
       </Selection>
+
+
+      </Suspense>
    </Canvas>
      
   
