@@ -395,7 +395,7 @@ export default function PhysicsPart() {
 
     </div>
 
-    <div className={styles.player}>Player</div>
+    {/* <div className={styles.player}>Player</div> */}
 
     </div>
     <Canvas camera={{ position: [0, 30, 25] }}  style={{ height: '100%'}} alpha={false}>

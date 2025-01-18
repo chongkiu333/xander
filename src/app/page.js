@@ -2,21 +2,35 @@
 import Image from "next/image";
 import * as THREE from "three";
 import { Canvas , useFrame } from '@react-three/fiber';
-import { Environment,OrbitControls , OrthographicCamera ,  Html ,useGLTF} from '@react-three/drei';
+import { Environment,OrbitControls , OrthographicCamera ,  Html ,useGLTF , useScroll ,ScrollControls } from '@react-three/drei';
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import React, { Suspense, useRef , useState} from 'react';
-import { EffectComposer, Outline , Select , Selection } from "@react-three/postprocessing";
+import {Select , Selection } from "@react-three/postprocessing";
 import styles from './page.module.css';
 import Link from "next/link";
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 
 
-function RingModel({modelPath, position,scale=1,text, ...props}){
+function RingModel({modelPath, position,scale=1,text,linkPath, ...props}){
   const { nodes, materials } = useGLTF(modelPath)
   const modelRef = useRef();
+  const scroll = useScroll(); 
 
   useFrame((state, delta) => {
     if (modelRef.current) {
+      // const startPosition = [0, position[1], 0]; // 第一位和第三位设置为 0
+      // const endPosition = position; 
+
+      // const scrollOffset = scroll.offset; // 0 到 1 之间的值
+      // const interpolatedPosition = [
+      //   startPosition[0] + (endPosition[0] - startPosition[0]) * scrollOffset,
+      //   startPosition[1] + (endPosition[1] - startPosition[1]) * scrollOffset,
+      //   startPosition[2] + (endPosition[2] - startPosition[2]) * scrollOffset,
+      // ];
+
+      // modelRef.current.position.set(...interpolatedPosition);
+
       modelRef.current.rotation.y += delta * 0.5; // Y轴旋转
       modelRef.current.position.y += Math.sin(state.clock.elapsedTime + position[1]) * 0.005; 
       
@@ -42,7 +56,7 @@ function RingModel({modelPath, position,scale=1,text, ...props}){
         distanceFactor={0.01} 
       >
         <div className={styles.subTitle} >
-          <Link href="/Test/music">
+          <Link href={linkPath}>
           {text}
           </Link>
         </div>
@@ -99,16 +113,17 @@ function RotatingGroup() {
   return (
     <group ref={groupRef}>
       {/* 将所有 RingModel 放在同一个 group 中 */}
-      <RingModel modelPath="/model2/ring1.gltf" position={[1, 8, -4.5]} text="BackStage" />
-      <RingModel modelPath="/model2/ring2.gltf" position={[10, 4, 8]} scale={1.25} text="CreativeDirection" />
-      <RingModel modelPath="/model2/ring3.gltf" position={[-5, -2,4.5]} scale={1.1} text="Music" />
-      <RingModel modelPath="/model2/ring4.gltf" position={[-11, -8, -6]} scale={2} text="Video" />
+      <RingModel modelPath="/model2/ring1.gltf" position={[1, 8, -4.5]} text="Shop" linkPath="/Test/shop" />
+      <RingModel modelPath="/model2/ring2.gltf" position={[10, 4, 8]} scale={1.25} text="CreativeDirection" linkPath="/Test/creativedirection" />
+      <RingModel modelPath="/model2/ring3.gltf" position={[-5, -2,4.5]} scale={1.1} text="Music" linkPath="/Test/music" />
+      <RingModel modelPath="/model2/ring4.gltf" position={[-11, -8, -6]} scale={2} text="Video" linkPath="/Test/video" />
     </group>
   );
 }
 
 export default function Home() {
   const [show, setShow] = useState(false);
+ 
   
 
 return (
@@ -152,8 +167,10 @@ return (
   
     
 
-
+<ScrollControls pages={3}>
 <RotatingGroup />
+</ScrollControls>
+
       <ambientLight intensity={10} />
       <directionalLight color="white" position={[1, 3, 5]} />
                 
