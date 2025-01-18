@@ -16,7 +16,7 @@ export function Model2(props) {
     const { nodes, materials } = useGLTF('/model/glasses.gltf')
     return (
       <group {...props} dispose={null}>
-        <group position={[-0.1, 0, -0.1]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <group position={[-0.8, 0.5, -1]} rotation={[Math.PI / 2, 0, 0]} scale={0.02}>
           <mesh
             castShadow
             receiveShadow
@@ -41,6 +41,18 @@ export function Model2(props) {
             geometry={nodes.Glasses_4.geometry}
             material={materials['09___Default']}
           />
+
+    <Html
+         position={[-0.8,0,-1]}// 在模型上方 2 个单位
+        center 
+        distanceFactor={0.01} 
+      >
+        <div className={styles.view} >
+         
+          View Product
+         
+        </div>
+      </Html>
         </group>
       </group>
     )
