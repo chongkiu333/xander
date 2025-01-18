@@ -11,6 +11,41 @@ import styles from './page.module.css';
 import Link from "next/link";
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 
+
+export function Model2(props) {
+    const { nodes, materials } = useGLTF('/model/glasses.gltf')
+    return (
+      <group {...props} dispose={null}>
+        <group position={[-0.1, 0, -0.1]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Glasses_1.geometry}
+            material={materials.wire_027177148}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Glasses_2.geometry}
+            material={materials['10___Default']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Glasses_3.geometry}
+            material={materials['08___Default']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Glasses_4.geometry}
+            material={materials['09___Default']}
+          />
+        </group>
+      </group>
+    )
+  }
+
 export function Model(props) {
     const { nodes, materials } = useGLTF('/model2/ring1.gltf')
     return (
@@ -26,6 +61,8 @@ export function Model(props) {
       </group>
     )
   }
+
+
 
 export default function Page() {
 
@@ -56,8 +93,8 @@ export default function Page() {
     
     
       
-        
         <Model position={[0,0,0]} />
+        <Model2 position={[0,0,0]} />
 
           <ambientLight intensity={2} />
           <directionalLight color="white" position={[1, 3, 5]} />
