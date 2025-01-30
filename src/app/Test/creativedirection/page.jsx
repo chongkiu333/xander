@@ -78,31 +78,31 @@ export default function Page() {
     <div className={styles.album}>
     <div className={styles.albumTitle}><div className={styles.innertitle}>BARRASERB - CAMPAIGN CREATIVE DIRECTION</div></div>
     <div className={styles.content}>
-    I crafted a "coming of age" theme, capturing the essence of youth and self-discovery. The campaign showcases a diverse group of young individuals, each embodying a unique style and attitude that reflects the eclectic and rebellious spirit of the brand. The visual direction features a vibrant, energetic backdrop that complements the bold, streetwear-inspired collection. This imagery, with its mix of casual and statement pieces, highlights the journey of growing up and finding one's identity through fashion, resonating with Barraserb's core audience.
+    I crafted a &quot;coming of age&quot; theme, capturing the essence of youth and self-discovery. The campaign showcases a diverse group of young individuals, each embodying a unique style and attitude that reflects the eclectic and rebellious spirit of the brand. The visual direction features a vibrant, energetic backdrop that complements the bold, streetwear-inspired collection. This imagery, with its mix of casual and statement pieces, highlights the journey of growing up and finding one&apos;s identity through fashion, resonating with Barraserb&apos;s core audience.
 
     </div>
 
     <div className={styles.imgContainer}>
     <div className={styles.row}>
-        <Image src="/cd/1R5A7235.jpg" alt="Image 1" width={500} height={0} layout="intrinsic"/>
+        <Image src="/cd/1R5A7235.jpg" alt="Image 1" width={200} height={0} layout="intrinsic"/>
       </div>
       <div className={styles.row}>
-        <Image src="/cd/1R5A7192.jpg" alt="Image 2" width={500} height={0} layout="intrinsic" />
+        <Image src="/cd/1R5A7192.jpg" alt="Image 2" width={200} height={0} layout="intrinsic" />
       </div>
       <div className={styles.row}>
-        <Image src="/cd/1R5A7313.jpg" alt="Image 3" width={500} height={0} layout="intrinsic" />
-      </div>
-
-      <div className={styles.row}>
-        <Image src="/cd/1R5A7123.jpg" alt="Image 3" width={500} height={0} layout="intrinsic" />
+        <Image src="/cd/1R5A7313.jpg" alt="Image 3" width={200} height={0} layout="intrinsic" />
       </div>
 
       <div className={styles.row}>
-        <Image src="/cd/1R5A7320test.jpg" alt="Image 3" width={500} height={0} layout="intrinsic" />
+        <Image src="/cd/1R5A7123.jpg" alt="Image 3" width={200} height={0} layout="intrinsic" />
       </div>
 
       <div className={styles.row}>
-        <Image src="/cd/1R5A7515.jpg" alt="Image 3" width={500} height={0} layout="intrinsic" />
+        <Image src="/cd/1R5A7320test.jpg" alt="Image 3" width={200} height={0} layout="intrinsic" />
+      </div>
+
+      <div className={styles.row}>
+        <Image src="/cd/1R5A7515.jpg" alt="Image 3" width={200} height={0} layout="intrinsic" />
       </div>
 
     </div>
