@@ -43,13 +43,47 @@ export default function Page() {
     return (
         <div className="canvasContainer" >
 
-        <div className={styles.headContainer}>
-        
-        
+           
+    <div className={styles.headContainer}>
+      <Link className={styles.title}  href="/">
+      <div className={styles.innertitle} >
+      XanderGhost<div className={styles.point}></div> 
+      </div>
+    </Link>
+    <div className={styles.album}>
+    <div className={styles.albumTitle}><div className={styles.innertitle}>XANDER GHOST - MASKOUN (OFFICIAL AUDIO) </div></div>
+
+    <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', background: '#000' ,marginBottom: '20px'}}>
+            <iframe
+                src={`https://www.youtube.com/embed/el7BRMW322U`}
+                title="YouTube video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+            />
+        </div>
+    <div className={styles.content}>
+    Written and Performed : Xander Ghost<br/>
+Music Production : Lecha <br/>
+Mixing and Mastering : Lecha <br/>
+
+2024 Quality Clique ©<br/>
+
+instagram.com/xanderghost<br/>
+instagram.com/lecha.wav<br/>
+
+    </div>
+
+
+
     
-        
-         
-         </div>
+
+
+    </div>
+
+   
+
+    </div>
         <Canvas className={styles.canvas}  style={{ height: '100%'}} alpha={false}>
         <Suspense fallback={null}>
           <Selection>
@@ -59,7 +93,7 @@ export default function Page() {
         <OrthographicCamera
             makeDefault // 设置为默认摄像机
             position={[10, 20, 20]} // 摄像机位置
-            zoom={75} // 调整缩放程度
+            zoom={85} // 调整缩放程度
             near={0.1}
             far={1000}
           />

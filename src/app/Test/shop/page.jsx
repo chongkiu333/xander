@@ -117,13 +117,17 @@ Black acetate frame, stainless steel temples, black nylon lenses</div>
     </div>
 
 
+
+    <div className={styles.shopButton}><div className={styles.iner}>Shop Now</div></div>
+
+
     
 
 
     </div>
 
-    {/* <div className={styles.player}>Player</div> */}
-
+   
+ 
     </div>
         <Canvas className={styles.canvas}  style={{ height: '100%'}} alpha={false}>
         <Suspense fallback={null}>

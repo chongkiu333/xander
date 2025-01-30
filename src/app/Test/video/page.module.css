@@ -1,0 +1,151 @@
+.headContainer{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 20px 20px 20px ;
+    right: 0;
+
+    width: 650px;
+    
+    
+    right: 0;
+    left: auto;
+    gap: 12px;
+    z-index: 999;
+   
+  }
+
+
+  .canvasContainer{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #1a1a1a,#666666,#757575,#ffffff,#ffffff);
+   
+    }
+
+
+.title{
+  background-color: aliceblue;
+ 
+  font-family:"ABCDiatype";
+  font-weight: 600;
+ 
+  justify-content: center;
+  font-size: 15px;
+  border: 0.7px solid black;
+  letter-spacing: -0.7px;
+  pointer-events: auto; 
+ 
+  display: inline-flex;
+
+  
+}
+
+.innertitle{
+
+ 
+  width: 100%;
+  height: 100%;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+  border: 0.9px solid black;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+
+
+}
+
+.innertitle:hover{
+  border-radius: 0px;
+}
+
+.album{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+
+.albumTitle{
+  background-color: aliceblue;
+  font-weight: 600;
+ 
+  font-family:"ABCDiatype";
+  font-size: 22px;
+  border: 0.5px solid black;
+  letter-spacing: -0.7px;
+  display: flex;
+  justify-content: center;
+
+
+}
+
+.trapezoidRight{
+  display: inline-block;
+  width: 20px; /* 梯形的宽度 */
+  height: 20px; /* 梯形的高度 */
+  background-color: #000000; /* 梯形的颜色 */
+  clip-path: polygon(0 0, 100% 40%, 100% 60%, 0% 100%);
+  transform: translate(-10%, 20%);
+}
+
+.content{
+  background-color: aliceblue;
+  color: rgb(102, 102, 102);
+  font-weight: 600;
+  padding: 7px;
+  font-family:"ABCDiatype";
+  font-size: 15px;
+  border: 0.5px solid black;
+  letter-spacing: -0.7px;
+  transition: all 0.3s ease-in-out;
+  margin-top: -15px;
+  
+}
+
+.albumList div:hover{
+  padding: 10px 3px 10px 3px;
+}
+
+
+.point{
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+  background-color: orange;
+  border-radius: 100%;
+  transform: translate(25%, 10%);
+}
+
+.albumImage{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #ffffff;
+  border: 0.8px solid black;
+  background-color: black;
+  justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .headContainer {
+    left: 50%; /* 从屏幕的中间开始 */ 
+    transform: translateX(-50%)  translateY(0%); /* 使容器水平居中 */
+    right: auto; /* 取消右对齐 */
+    width: 450px;
+  }
+
+
+  
+}
