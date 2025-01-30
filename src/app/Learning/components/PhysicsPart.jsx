@@ -371,25 +371,25 @@ export default function PhysicsPart() {
     
     <div className={styles.headContainer}>
       <Link className={styles.title}  href="/">
-    
+      <div className={styles.innertitle} >
       XanderGhost<div className={styles.point}></div> 
-      
-    </Link>
+      </div>
+      </Link>
     <div className={styles.album}>
     <div className={styles.albumTitle}><div class={styles.trapezoidRight}></div>17sas Gayed</div>
     <div className={styles.albumList}>
-      <div>1. Minamela</div>
+     <div>1. Minamela</div>
       <div>2. Fo2</div>
       <div>3. Atbaneg</div>
       <div>4. Asetou</div>
       <div>5. Maskoun</div>
-      <div style={{height: '80px'}}></div>
+      
 
     </div>
 
 
     <div className={styles.albumImage}>
-    <Image  className={styles.img} alt='albumimg'  src="/album/1.png" layout="responsive" width={300} height={300} />
+    <Image  className={styles.img} alt='albumimg'  src="/album/1.png" layout="responsive" width={100} height={100} />
     </div>
 
 

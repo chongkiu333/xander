@@ -82,13 +82,49 @@ export default function Page() {
     return (
         <div className="canvasContainer" >
 
-        <div className={styles.headContainer}>
         
-        
+    <div className={styles.headContainer}>
+      <Link className={styles.title}  href="/">
+      <div className={styles.innertitle} >
+      XanderGhost<div className={styles.point}></div> 
+      </div>
+      </Link>
+    <div className={styles.album}>
+
+
+
+
+    <div className={styles.productImage}>
+    <Image  className={styles.img} alt='albumimg'  src="/productPicture/1.png" layout="responsive" width={100} height={100} />
+    </div>
+
+
+    <div className={styles.productTitle}>
+      <div className={styles.iner}>
+      <div>ALKA Orange Fleck</div>
+      <div>$310</div>
+      </div>
+    </div>
+
+
+    <div className={styles.productDiscription}>
+      <div className={styles.iner2}>
+      <div>Corten is an acetate frame with stainless steel temples, featuring etched graduations resembling a drill gauge. Featuring lenses with 100% UV protection.</div>
+      <div>DIMENSIONS + COMPOSITION
+Frame width: 125.0mm
+Black acetate frame, stainless steel temples, black nylon lenses</div>
+      </div>
+    </div>
+
+
     
-        
-         
-         </div>
+
+
+    </div>
+
+    {/* <div className={styles.player}>Player</div> */}
+
+    </div>
         <Canvas className={styles.canvas}  style={{ height: '100%'}} alpha={false}>
         <Suspense fallback={null}>
           <Selection>

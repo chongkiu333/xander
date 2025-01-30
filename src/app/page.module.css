@@ -20,7 +20,12 @@
  
   font-family:"ABCDiatype";
   font-weight: 600;
-  padding: 3px 80px 3px 80px;
+  width: 300px;
+  height: 23px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 15px;
   border: 0.5px solid black;
   letter-spacing: -0.7px;
@@ -29,6 +34,30 @@
   display: inline-flex;
 
   
+}
+
+.title:hover .point{
+  background-color: rgb(255, 94, 0);
+}
+
+
+.inertitle{
+  
+  width: 301px;
+  height: 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 0.5px solid black;
+  transition: all 0.3s ease-in-out;
+
+}
+
+.inertitle:hover{
+  border-radius: 0px;
+  border: 0.2px solid black;
+
 }
 
 .about{
@@ -52,7 +81,7 @@
   display: inline-block;
   background-color: orange;
   border-radius: 100%;
-  transform: translate(25%, 10%);
+  transform: translate(25%, 0%);
 }
 .hovered{
   z-index: 999;
