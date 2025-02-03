@@ -9,7 +9,7 @@ import React, { Suspense, useRef , useState} from 'react';
 import {Select , Selection } from "@react-three/postprocessing";
 import styles from './page.module.css';
 import Link from "next/link";
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
+
 
 
 function RingModel({modelPath, position,scale=1,text,linkPath, ...props}){

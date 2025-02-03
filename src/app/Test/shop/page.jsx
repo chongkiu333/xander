@@ -129,6 +129,44 @@ Black acetate frame, stainless steel temples, black nylon lenses</div>
    
  
     </div>
+
+
+<Loader
+
+containerStyles={{
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  background: 'linear-gradient(to bottom, #1a1a1a,#666666,#757575,#ffffff,#ffffff)', // 半透明背景
+}}
+innerStyles={{
+  border:'0.5px solid black',
+  width:'300px',
+  height:'21px',
+  backgroundColor: 'aliceblue', // 背景颜色
+  
+}}
+
+barStyles={{
+  backgroundColor: '#000000', // 进度条颜色
+  height: '100%',
+  
+}}
+
+dataStyles={{
+  color: '#fff',
+  fontSize: '15px',
+  fontFamily: 'ABCDiatype',
+ 
+}}
+
+dataInterpolation={(p) => ``} 
+   />
         <Canvas className={styles.canvas}  style={{ height: '100%'}} alpha={false}>
         <Suspense fallback={null}>
           <Selection>
