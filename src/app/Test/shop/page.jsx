@@ -2,7 +2,7 @@
 import Image from "next/image";
 import * as THREE from "three";
 import { Canvas , useFrame } from '@react-three/fiber';
-import { Environment,OrbitControls , OrthographicCamera ,  Html ,useGLTF} from '@react-three/drei';
+import { Environment,OrbitControls , OrthographicCamera ,  Html ,useGLTF,Loader} from '@react-three/drei';
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import React, { Suspense, useRef , useState} from 'react';
