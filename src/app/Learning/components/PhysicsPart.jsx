@@ -7,13 +7,53 @@ import React, { useRef } from 'react';
 import styles from './PhysicsPart.module.css';
 import Image from "next/image";
 import Link from "next/link";
+import SpotifyWebApi from 'spotify-web-api-node';
 
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID,
+  clientSecret: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET
+});
 
 const albums = [
   
   { id: "1BFzYg3qyrsCkcg7An1IrS", name: "I7sas Gayed" },
   { id: "0f4OC1KOk5Uo2MVaP0kIbS", name: "Kotshina" },
 ];
+
+const getAlbumInfo = async (albumId) => {
+  try {
+    // 获取访问令牌
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic ' + btoa(
+          process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID + ':' + 
+          process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET
+        ),
+      },
+      body: 'grant_type=client_credentials',
+    });
+    const data = await response.json();
+    spotifyApi.setAccessToken(data.access_token);
+
+    // 获取专辑信息
+    const album = await spotifyApi.getAlbum(albumId);
+    
+    return {
+      id: albumId,
+      name: album.body.name,
+      tracks: album.body.tracks.items.map(track => ({
+        name: track.name,
+        id: track.id
+      })),
+      imageUrl: album.body.images[0].url
+    };
+  } catch (error) {
+    console.error('获取专辑信息失败:', error);
+    return null;
+  }
+};
 
 
 function Floors({setCurrentAlbum}, props) {
@@ -25,14 +65,40 @@ function Floors({setCurrentAlbum}, props) {
   const { nodes: nodes6, materials: materials6 } = useGLTF('/album/tamasee7.gltf');
   // const { nodes: nodes7, materials: materials7 } = useGLTF('/album/tamasee7.gltf');
 
-  const [sphereref] = useSphere(() => ({ 
+  const handleAlbumInteraction = async (albumId) => {
+    
+    const albumInfo = await getAlbumInfo(albumId);
+    if (albumInfo) {
+      setCurrentAlbum(albumInfo);
+    }
+  };
+
+  const [spherePosition, setSpherePosition] = useState([0, 10, 20]);
+
+
+  const [sphereref, sphereApi] = useSphere(() => ({ 
     mass: 1, 
-    position: [0, 10, 20],
-    material:{
+    position: spherePosition,
+    material: {
       friction: 1,
       restitution: 0.01,
-    } ,
-    ...props }));
+    },
+    ...props 
+  }));
+
+  useEffect(() => {
+    // 订阅位置变化
+    const unsubscribe = sphereApi.position.subscribe((pos) => {
+      // 如果球体低于某个高度（比如 -20），重置位置
+      if (pos[1] < -20) {
+        sphereApi.position.set(0, 10, 20); // 重置到初始位置
+        sphereApi.velocity.set(0, 0, 0);   // 重置速度
+      }
+    });
+
+    // 清理订阅
+    return () => unsubscribe();
+  }, [sphereApi]);
 
    
 
@@ -41,7 +107,7 @@ function Floors({setCurrentAlbum}, props) {
     type: 'Static',
     mass: 1,
     position: [0, -1, 0],
-    args: [28, 28, 2.5],
+    args: [35, 35, 2.5],
     rotation: [0, 0, 0],
     material: {
       friction: 2,
@@ -62,14 +128,7 @@ function Floors({setCurrentAlbum}, props) {
     onCollide: (e) => {
       // 碰撞时触发 alert
       if (e.body === sphereref.current) {
-        setCurrentAlbum({
-          id: "1BFzYg3qyrsCkcg7An1IrS",
-          name: "I7sas Gayed",
-          tracks: [
-            "Minamela", "Fo2", "Atbaneg", "Asetou", "Maskoun"
-          ],
-          imageUrl: "/album/1.png"
-        });
+        handleAlbumInteraction("1BFzYg3qyrsCkcg7An1IrS");
 
 
       }
@@ -91,14 +150,8 @@ function Floors({setCurrentAlbum}, props) {
     onCollide: (e) => {
       // 碰撞时触发 alert
       if (e.body === sphereref.current) {
-        setCurrentAlbum({
-          id: "0f4OC1KOk5Uo2MVaP0kIbS",
-          name: "Kotshina",
-          tracks: [
-            "Kotshina"
-          ],
-          imageUrl: "/album/2.png"
-        });
+        
+        handleAlbumInteraction("0f4OC1KOk5Uo2MVaP0kIbS");
       }
  
     },
@@ -118,14 +171,9 @@ function Floors({setCurrentAlbum}, props) {
     onCollide: (e) => {
       // 碰撞时触发 alert
       if (e.body === sphereref.current) {
-        setCurrentAlbum({
-          id: "1BFzYg3qyrsCkcg7An1IrS",
-          name: "Galeedi",
-          tracks: [
-            "BMT BMF", "Marra Kol 100 Sana", "Mouve", "Samra", "To2"
-          ],
-          imageUrl: "/album/3.png"
-        });
+        
+
+        handleAlbumInteraction("0eGLEj4SyvtZauFqtAdJJj");
 
 
       }
@@ -149,14 +197,9 @@ function Floors({setCurrentAlbum}, props) {
     onCollide: (e) => {
       // 碰撞时触发 alert
       if (e.body === sphereref.current) {
-        setCurrentAlbum({
-          id: "1BFzYg3qyrsCkcg7An1IrS",
-          name: "Banzeen",
-          tracks: [
-            "Banzeen"
-          ],
-          imageUrl: "/album/4.png"
-        });
+       
+
+        handleAlbumInteraction("3Sml2WABWri43Eyyhnt9rG");
       }
  
     },
@@ -178,14 +221,9 @@ function Floors({setCurrentAlbum}, props) {
     onCollide: (e) => {
       // 碰撞时触发 alert
       if (e.body === sphereref.current) {
-        setCurrentAlbum({
-          id: "1BFzYg3qyrsCkcg7An1IrS",
-          name: "Tamasee7",
-          tracks: [
-            "Tamasee7"
-          ],
-          imageUrl: "/album/5.png"
-        });
+        
+
+        handleAlbumInteraction("5jzNKvcw2NIm9uRDTOg9rQ");
       }
  
     },
@@ -269,32 +307,38 @@ function Floors({setCurrentAlbum}, props) {
         geometry={nodes1.ring.geometry}
         material={materials1.oil}
         position={[0.008, -0.2, -0.035]}
-        scale={[5,2.5,5]}
+        scale={[6,2.5,6]}
       />
       </group>
 
       
 
-<mesh receiveShadow castShadow ref={sphereref}>
-      <sphereGeometry args={[1]} />
-      <meshStandardMaterial 
-        color={"gray"}
-        emissive= {"black"}
-        metalness={1}
-        roughness={0.14}
-        envMapIntensity={1.5}
+      <mesh receiveShadow castShadow ref={sphereref}>
+        <sphereGeometry args={[1]} />
+        <meshStandardMaterial 
+          color={"gray"}
+          emissive={"black"}
+          metalness={1}
+          roughness={0.14}
+          envMapIntensity={1.5}
         />
-    </mesh>
+      </mesh>
 
 
       {/*album*/}
-      <group  ref={albumref}   scale={[5, 5, 0.36]}>
+      <group  ref={albumref}   scale={[5, 5, 0.36]} onClick={(e) => {
+          e.stopPropagation(); // 防止事件冒泡
+          handleAlbumInteraction("1BFzYg3qyrsCkcg7An1IrS");
+        }}>
         <mesh castShadow receiveShadow geometry={nodes2.cube_1.geometry} material={materials2.m001} />
         <mesh castShadow receiveShadow geometry={nodes2.cube_2.geometry} material={materials2.m002} />
       </group>
 
       {/*album*/}
-      <group  ref={kotshinaref}   scale={[5, 5, 0.36]}>
+      <group  ref={kotshinaref}   scale={[5, 5, 0.36]} onClick={(e) => {
+          e.stopPropagation(); // 防止事件冒泡
+          handleAlbumInteraction("0f4OC1KOk5Uo2MVaP0kIbS");
+        }}>
         <mesh castShadow receiveShadow geometry={nodes3.cube_1.geometry} material={materials3.m001} />
         <mesh castShadow receiveShadow geometry={nodes3.cube_2.geometry} material={materials3.m002} />
       </group>
@@ -327,78 +371,37 @@ function Floors({setCurrentAlbum}, props) {
 
 
 
-function Sphere(props){
-
-  const [ref] = useSphere(() => ({ 
-    mass: 1, 
-    position: [0, 1, 0],
-    material:{
-      friction: 1,
-      restitution: 0.01,
-    } ,
-    ...props }));
-  return (
-    <mesh receiveShadow castShadow ref={ref}>
-      <sphereGeometry args={[1]} />
-      <meshStandardMaterial 
-        color={"gray"}
-        emissive= {"black"}
-        metalness={1}
-        roughness={0.14}
-        envMapIntensity={1.5}
-        />
-    </mesh>
-  );
-}
-
-
-function Box(props){
-  const [ref] = useBox(() => ({ 
-    type:'Dynamic',
-    mass: 1, 
-    position: props.position || [0, 5, 0], 
-    args: [10, 10, 0.72], 
-    rotation:props.rotation || [0, 0, 0],
-    onCollide: (e) => {
-      // 碰撞时触发 alert
-      
-      
-    },
-    material:{
-      friction: 2,
-      restitution: 0.05,
-    },
-     ...props }));
-  return (
-    <mesh receiveShadow castShadow ref={ref}>
-      <boxGeometry  args={[10, 10, 0.72]} />
-      <meshStandardMaterial 
-        color={"white"}
-        emissive= {"black"}
-        metalness={1}
-        roughness={0.14}
-        envMapIntensity={1.5}
-        />
-    </mesh>
-  );
-}
-
-
-
-
 
 
 
 export default function PhysicsPart() {
-  const [currentAlbum, setCurrentAlbum] = useState({
-    id: "1BFzYg3qyrsCkcg7An1IrS",  // 默认专辑ID
-    name: "I7sas Gayed",           // 默认专辑名称
-    tracks: [
-      "Minamela", "Fo2", "Atbaneg", "Asetou", "Maskoun"
-    ],                             // 默认歌曲列表
-    imageUrl: "/album/1.png"       // 默认专辑图片
-  });
   
+  const [currentAlbum, setCurrentAlbum] = useState({
+    id: "1BFzYg3qyrsCkcg7An1IrS",
+    name: "Loading...",
+    tracks: [],
+    imageUrl: "/album/1.png"
+  });
+
+  const [currentTrack, setCurrentTrack] = useState(null);
+  const [showTracks, setShowTracks] = useState(false);
+
+
+  useEffect(() => {
+    const fetchDefaultAlbum = async () => {
+      const albumInfo = await getAlbumInfo("1BFzYg3qyrsCkcg7An1IrS");
+      if (albumInfo) {
+        setCurrentAlbum(albumInfo);
+      }
+    };
+    fetchDefaultAlbum();
+  }, []);
+
+  useEffect(() => {
+    if (currentAlbum.tracks && currentAlbum.tracks.length > 0) {
+      setCurrentTrack(currentAlbum.tracks[0]);
+    }
+  }, [currentAlbum]);
 
   
   return (
@@ -411,10 +414,13 @@ export default function PhysicsPart() {
       </div>
       </Link>
     <div className={styles.album}>
-    <div className={styles.albumTitle}><div class={styles.trapezoidRight}></div> {currentAlbum.name} </div>
-    <div className={styles.albumList}>
+    <div className={styles.albumTitle} onClick={() => setShowTracks(!showTracks)}><div className={styles.innerablbum} ><div class={styles.trapezoidRight}></div> {currentAlbum.name} </div></div>
+    <div className={`${styles.albumList} ${showTracks ? styles.show : styles.hide}`}>
     {currentAlbum.tracks.map((track, index) => (
-              <div key={index}>{`${index + 1}. ${track}`}</div>
+              <div key={index}  className={styles.trackItem} onClick={() => setCurrentTrack(track)} >
+                <span>{`${index + 1}. ${track.name}`} </span>
+                <span >&rarr;</span>
+                </div>
             ))}
       
 
@@ -428,7 +434,21 @@ export default function PhysicsPart() {
 
     </div>
 
-    {/* <div className={styles.player}>Player</div> */}
+    <div className={styles.spotifyPlayer}>
+          {currentTrack && (
+            <iframe
+              src={`https://open.spotify.com/embed/track/${currentTrack.id}?utm_source=generator`}
+              width="100%"
+              height="80"
+              frameBorder="0"
+              allowFullScreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            />
+          )}
+        </div>
+
+    
 
     </div>
 

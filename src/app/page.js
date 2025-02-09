@@ -159,7 +159,7 @@ dataInterpolation={(p) => ``}
       <ambientLight intensity={10} />
       <directionalLight color="white" position={[1, 3, 5]} />
                 
-      <OrbitControls enableZoom={false}  />
+      <OrbitControls enableZoom={true}  />
    
       <Environment preset="forest" background={false} ground={false}  />
       </Selection>
