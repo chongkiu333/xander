@@ -60,14 +60,14 @@
   border-radius: 0px;
 }
 
-.album{
+.video{
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
 
-.albumTitle{
+.videoTitle{
   background-color: aliceblue;
   font-weight: 600;
  

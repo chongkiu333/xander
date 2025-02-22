@@ -14,11 +14,7 @@ const spotifyApi = new SpotifyWebApi({
   clientSecret: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET
 });
 
-const albums = [
-  
-  { id: "1BFzYg3qyrsCkcg7An1IrS", name: "I7sas Gayed" },
-  { id: "0f4OC1KOk5Uo2MVaP0kIbS", name: "Kotshina" },
-];
+
 
 const getAlbumInfo = async (albumId) => {
   try {
@@ -80,9 +76,11 @@ function Floors({setCurrentAlbum}, props) {
     mass: 1, 
     position: spherePosition,
     material: {
-      friction: 1,
+      friction: 0.1,
       restitution: 0.01,
     },
+    linearDamping: 0.5,  // 添加阻尼使运动更平滑
+    angularDamping: 0.5,  // 添加角度阻尼
     ...props 
   }));
 

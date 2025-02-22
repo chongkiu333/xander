@@ -9,6 +9,9 @@ const nextConfig = {
                 pathname: '/**',
             },
         ],
+        domains: [
+            'i.ytimg.com',
+        ],
     },
 };
 
