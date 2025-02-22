@@ -23,6 +23,7 @@ export function Model(props) {
   function Carousel({radius=3.2, count =12}){
     return Array.from({length:count},(_,i)=>(
       <VideoBox 
+      key={i}
       rotation={[0, Math.PI + (i / count) * Math.PI * 2, 0]}
       position={[Math.sin((i / count) * Math.PI * 2) * radius, 0, Math.cos((i / count) * Math.PI * 2) * radius]}
      
