@@ -68,7 +68,7 @@ export function VideoBox({thumbnailUrl, ...props}){
 
 
 
-  export function VideoScene({ thumbnailUrl }) {
+  export function VideoScene({ videoDatas }) {
   const [textureLoaded,setTextureLoaded] = useState(false);
   return (
     <Canvas className={styles.canvas} style={{ height: '100%'}} alpha={false}>
@@ -83,7 +83,7 @@ export function VideoBox({thumbnailUrl, ...props}){
           />
           <Model position={[0,0,0]} />
           <VideoBox 
-            thumbnailUrl={thumbnailUrl}
+            thumbnailUrl={videoDatas[4]?.thumbnails?.medium?.url}
             rotation={[0,Math.PI/2,0]} 
             position={[-3.2, 0.3, 0]} 
             onLoad={()=>setTextureLoaded(true)}
