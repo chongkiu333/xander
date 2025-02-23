@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import * as THREE from "three";
 import { Canvas , useFrame } from '@react-three/fiber';
@@ -63,7 +64,7 @@ export default async function Page() {
               </div>
             </Link>
             <div className={styles.video}>
-              <div className={styles.videoTitle}>暂无视频内容</div>
+              <div className={styles.videoTitle}>No Videos Found</div>
             </div>
           </div>
         </div>
@@ -80,7 +81,7 @@ export default async function Page() {
             </div>
           </Link>
           <div className={styles.video}>
-            <div className={styles.videoTitle}>获取视频时出错</div>
+            <div className={styles.videoTitle}>Error</div>
           </div>
         </div>
       </div>
@@ -88,36 +89,10 @@ export default async function Page() {
   }
 
   return (
-    <div className="canvasContainer">
-      <div className={styles.headContainer}>
-        
-        <Link className={styles.title}  href="/">
-          <div className={styles.innertitle} >
-            XanderGhost<div className={styles.point}></div> 
-          </div>
-        </Link>
-        <div className={styles.video}>
-          <div className={styles.videoTitle}><div className={styles.innertitle}>{videos[0].title}</div></div>
-
-          <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', background: '#000' ,marginBottom: '20px'}}>
-          <iframe
-              src={`https://www.youtube.com/embed/${videos[0].videoId}?rel=0`}
-              title="YouTube video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-            />
-            
-          </div>
-          <div className={styles.content}>
-          {videos[0].description}
-
-          </div>
-        </div>
-      </div>
+    
       <VideoScene
         videoDatas={videos}
         />
-    </div>
+    
   );
 }
