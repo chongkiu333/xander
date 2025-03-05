@@ -19,17 +19,7 @@ function RingModel({modelPath, position,scale=1,text,linkPath, ...props}){
 
   useFrame((state, delta) => {
     if (modelRef.current) {
-      // const startPosition = [0, position[1], 0]; // 第一位和第三位设置为 0
-      // const endPosition = position; 
-
-      // const scrollOffset = scroll.offset; // 0 到 1 之间的值
-      // const interpolatedPosition = [
-      //   startPosition[0] + (endPosition[0] - startPosition[0]) * scrollOffset,
-      //   startPosition[1] + (endPosition[1] - startPosition[1]) * scrollOffset,
-      //   startPosition[2] + (endPosition[2] - startPosition[2]) * scrollOffset,
-      // ];
-
-      // modelRef.current.position.set(...interpolatedPosition);
+      
 
       modelRef.current.rotation.y += delta * 0.5; // Y轴旋转
       modelRef.current.position.y += Math.sin(state.clock.elapsedTime + position[1]) * 0.005; 

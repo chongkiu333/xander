@@ -14,15 +14,25 @@ import Link from "next/link";
 
 
 
+
   export function VideoScene({ videoDatas }) {
   const [textureLoaded,setTextureLoaded] = useState(false);
   const [selectvideoId,setSelectvideoId] = useState(0);
+  const [isClose, setIsClose] = useState(true);
+  
+  
+
 
 
   return (
     <div className="canvasContainer">
       
-    <InfoBox videoDatas={videoDatas} selectvideoId={selectvideoId}/>
+    <InfoBox 
+    videoDatas={videoDatas} 
+    selectvideoId={selectvideoId}
+    isClose={isClose}     
+    setIsClose={setIsClose} 
+    />
     <Canvas className={styles.canvas} style={{ height: '100%'}} alpha={false}>
       <Suspense fallback={null}>
         <Selection>
@@ -33,15 +43,11 @@ import Link from "next/link";
             near={0.1}
             far={1000}
           />
-          <Model position={[0,0,0]} />
-          
-          <Carousel
-           radius={3.2} 
-           count={12} 
-           videoDatas={videoDatas}
-           selectvideoId={selectvideoId}
-           setSelectvideoId={setSelectvideoId}
-            />
+
+       
+          <RotateGroup videoDatas={videoDatas} selectvideoId={selectvideoId} setSelectvideoId={setSelectvideoId} setIsClose={setIsClose} />
+
+
           <ambientLight intensity={10} />
           <directionalLight color="white" position={[1, 3, 5]} />
           <OrbitControls enableZoom={true} />
@@ -53,7 +59,33 @@ import Link from "next/link";
   );
 }
 
-function InfoBox({videoDatas,selectvideoId}){
+
+function RotateGroup({videoDatas, selectvideoId, setSelectvideoId, setIsClose}){
+  const groupRef = useRef();
+
+  useFrame((state, delta) => {
+    groupRef.current.rotation.y += delta * 0.1;
+  });
+
+
+  return(
+    <group ref={groupRef}>
+    <Model position={[0,0,0]} />
+          
+    <Carousel
+        radius={3.2} 
+        videoDatas={videoDatas}
+        selectvideoId={selectvideoId}
+        setSelectvideoId={setSelectvideoId}
+        setIsClose={setIsClose}  
+      />
+    </group>
+  )
+
+}
+
+function InfoBox({videoDatas,selectvideoId,isClose, setIsClose}){
+
 
   return(
     <div className={styles.headContainer}>
@@ -63,8 +95,16 @@ function InfoBox({videoDatas,selectvideoId}){
         XanderGhost<div className={styles.point}></div> 
       </div>
     </Link>
-    <div className={styles.video}>
-      <div className={styles.videoTitle}><div className={styles.innertitle}>{videoDatas[selectvideoId].title}</div></div>
+     
+     <div className={`${styles.video} ${!isClose ? styles.videoShow : ''}`}>
+      <div className={styles.videoTitle}><div className={styles.innertitle}>
+        {videoDatas[selectvideoId].title} 
+
+        <div className={styles.closeButton} onClick={() => setIsClose(!isClose)}><div className={styles.buttonInner}>
+        <span className={styles.closeX}></span>
+          </div></div>
+        
+         </div></div>
 
       <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', background: '#000' ,marginBottom: '20px'}}>
       <iframe
@@ -81,6 +121,7 @@ function InfoBox({videoDatas,selectvideoId}){
 
       </div>
     </div>
+ 
   </div>
   
   )
@@ -123,7 +164,7 @@ return (
   
 }
 
-function Carousel({radius=3.2, videoDatas, selectvideoId, setSelectvideoId}){
+function Carousel({radius=3.2, videoDatas, selectvideoId, setSelectvideoId, setIsClose}){
 
 
   const count = videoDatas.length;
@@ -140,15 +181,22 @@ function Carousel({radius=3.2, videoDatas, selectvideoId, setSelectvideoId}){
       ]}
       isSelected={i === selectvideoId} 
       thumbnailUrl={videoDatas[i]?.thumbnails?.medium?.url}
-      onClick={() => setSelectvideoId(i)}
+      onClick={() =>{ setSelectvideoId(i); setIsClose(false)}}
     />
   ))
 }
 
 function Model(props) {
   const { nodes, materials } = useGLTF('/page/videoBase.glb')
+  const modelRef = useRef();
+
+  useFrame((state, delta) => {
+   
+  });
+
+
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} ref={modelRef}>
     <mesh castShadow receiveShadow geometry={nodes.锥体.geometry} material={materials.原油} />
   </group>
   )
