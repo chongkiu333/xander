@@ -5,7 +5,7 @@ import React, { Suspense, useRef , useState, useEffect} from 'react';
 import { easing } from "maath";
 import {Select , Selection } from "@react-three/postprocessing";
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, OrbitControls, OrthographicCamera} from '@react-three/drei';
+import { Environment, OrbitControls, OrthographicCamera,CameraControls,Image} from '@react-three/drei';
 import styles from './VideoBox.module.css';
 import Link from "next/link";
 
@@ -36,6 +36,7 @@ import Link from "next/link";
     <Canvas className={styles.canvas} style={{ height: '100%'}} alpha={false}>
       <Suspense fallback={null}>
         <Selection>
+          <CameraControls />
           <OrthographicCamera
             makeDefault
             position={[10, 20, 20]}
@@ -157,6 +158,8 @@ return (
       position={[-0.06, 0.45, 0]}
       rotation={[0, -Math.PI / 2, 0]}
       scale={[1.55, 0.85, 1]}
+      radius={0.1}
+      transparent={true}
     />
     
   </group>

@@ -11,8 +11,13 @@ const nextConfig = {
         ],
         domains: [
             'i.ytimg.com',
+            'cdn.prod.website-files.com',
         ],
+        
     },
+
+    
+
 };
 
 export default nextConfig;

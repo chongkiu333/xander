@@ -11,7 +11,7 @@
     "@react-three/drei": "^9.119.0",
     "@react-three/fiber": "^8.17.10",
     "@react-three/postprocessing": "^2.16.3",
-    "axios": "^1.7.9",
+    "axios": "^1.8.2",
     "cannon-es": "^0.20.0",
     "googleapis": "^144.0.0",
     "maath": "^0.10.8",
