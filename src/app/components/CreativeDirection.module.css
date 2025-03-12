@@ -161,7 +161,15 @@
     left: 50%; /* 从屏幕的中间开始 */ 
     transform: translateX(-50%)  translateY(0%); /* 使容器水平居中 */
     right: auto; /* 取消右对齐 */
-    width: 450px;
+    width: 75vw;
+  }
+
+  .row {
+    flex-basis: calc(50% - 5px); /* 每个图片占宽度的 1/2 减去间距 */
+  }
+
+  .imgContainer {
+    height: 50vh;
   }
 
 
