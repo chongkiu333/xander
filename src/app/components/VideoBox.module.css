@@ -120,6 +120,8 @@
     letter-spacing: -0.7px;
     transition: all 0.3s ease-in-out;
     margin-top: -15px;
+    max-height: 30vh;
+    overflow: auto;
     
   }
   

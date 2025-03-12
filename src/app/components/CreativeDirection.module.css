@@ -13,6 +13,7 @@
     gap: 12px;
     z-index: 999;
    
+   
   }
 
 
@@ -60,14 +61,16 @@
   border-radius: 0px;
 }
 
-.album{
+.info{
   display: flex;
   flex-direction: column;
   gap: 5px;
+  
+  
 }
 
 
-.albumTitle{
+.infoTitle{
   background-color: aliceblue;
   font-weight: 600;
  
@@ -135,6 +138,8 @@
   background-color: aliceblue;
   padding: 10px;
   gap: 5px; /* 每个图片之间的间距 */
+  height: 70vh;
+  overflow: auto;
 }
 
 .row {

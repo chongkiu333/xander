@@ -7,7 +7,7 @@ import React from 'react';
 import styles from './page.module.css';
 import Link from "next/link";
 import { getChannelVideos, getVideoDetails } from '../../api/youtube.js';
-import { VideoScene } from '../../Learning/components/VideoBox';
+import { VideoScene } from '../../components/VideoBox';
 
 
 

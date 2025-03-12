@@ -10,8 +10,28 @@ import styles from './CreativeDirection.module.css';
 import Link from "next/link";
 
 
-export function CreativeDirection() {
+export function CreativeDirection({projectData}) {
+  const [selectedProjectId, setSelectedProjectId] = useState("67c9c90d8b7ffe940a246b61");
+  const [isClosed, setIsClosed] = useState(true);
+
+  
+
+
     return (
+      <div className="canvasContainer" >
+      
+            
+      <div className={styles.headContainer}>
+        <Link className={styles.title}  href="/">
+        <div className={styles.innertitle} >
+        XanderGhost<div className={styles.point}></div> 
+        </div>
+      </Link>
+      
+      <InfoBox projectData={projectData} selectedProjectId={selectedProjectId} setSelectedProjectId={setSelectedProjectId} />
+      
+      
+      </div>
         <Canvas className={styles.canvas}  style={{ height: '100%'}} alpha={false}>
       <Suspense fallback={null}>
         <Selection>
@@ -29,7 +49,7 @@ export function CreativeDirection() {
   
     
       
-      <Model position={[0,0,0]} />
+      <Model projectDatas={projectData} selectedProjectId={selectedProjectId} setSelectedProjectId={setSelectedProjectId} position={[0,0,0]} />
 
         <ambientLight intensity={2} />
         <directionalLight color="white" position={[1, 3, 5]} />
@@ -44,7 +64,7 @@ export function CreativeDirection() {
      </Canvas> 
        
     
-  
+     </div>
    
     );
 }
@@ -102,8 +122,13 @@ export function Model2(props) {
 
 
 
-function Model(props) {
+function Model({projectDatas,selectedProjectId,setSelectedProjectId,...props}) {
   const { nodes, materials } = useGLTF("/model2/ring2.gltf")
+
+  const onProjectClick = (id) => {
+    setSelectedProjectId(id);
+  }
+
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -115,21 +140,35 @@ function Model(props) {
         scale={[1, 1, 1]}
       />
 
-      <BasicBlock position={[0,1.5,0]} />
+      
+      {projectDatas.map(projectData => (
+        projectData.fieldData.coverimages.map((image, index) => (
+          <BasicBlock imgUrl={image.url||"/cd/1R5A7235.jpg"} key={`${projectData.id}-cover-${index}`}  onClick={() => onProjectClick(projectData.id)}  />
+        ))
+      ))}
+    
     </group>
   )
 }
 
-function BasicBlock(props){
-  const texture = useLoader(THREE.TextureLoader, '/cd/1R5A7235.jpg')
-  const aspectRatio = texture.image.width / texture.image.height
+function BasicBlock({imgUrl,...props}){
+  const texture = useLoader(THREE.TextureLoader, imgUrl)
+  const aspectRatio = texture.image.width / texture.image.height;
+  const meshRef = useRef();
+  const x = Math.random() * 9 - 4;
+  const y = 1.6;
+  const z = Math.random() * 9 - 4;
+  const centerPoint = [0, 1.7, 0];
+  const angleY = Math.atan2(centerPoint[0] - x, centerPoint[2] - z);
+  
 
   return (
-    <mesh {...props} rotation={[0,0,Math.PI/4]}>
+    
+    <mesh ref={meshRef} {...props} position={[ x, y, z ]}  rotation={[0,angleY,0]}>
       <boxGeometry args={[aspectRatio*1.3, 1.3, 0.06]} />
       <meshBasicMaterial color="black" />
       <DreiImage
-        url="/cd/1R5A7235.jpg"
+        url={imgUrl}
         position={[0, 0, 0.031]}
         rotation={[0, 0, 0]}
         scale={[aspectRatio*1.2, 1.2, 1.2]}
@@ -138,7 +177,7 @@ function BasicBlock(props){
       />
 
 <DreiImage
-        url="/cd/1R5A7235.jpg"
+        url={imgUrl}
         position={[0, 0, -0.031]}
         rotation={[0, Math.PI, 0]}
         scale={[aspectRatio*1.2, 1.2, 1.2]}
@@ -147,5 +186,36 @@ function BasicBlock(props){
       />
    
     </mesh>
+  )
+}
+
+
+export function InfoBox({ projectData,selectedProjectId,setSelectedProjectId }){
+  const [selectvideoId,setSelectvideoId] = useState("67c9c90d8b7ffe940a246b61");
+  const targetProject = projectData.find(item => item.id === selectedProjectId);
+  const project = targetProject?.fieldData;
+
+
+
+  return(
+    <div className={styles.info}>
+    <div className={styles.infoTitle}><div className={styles.innertitle}>{project.name}</div></div>
+    <div className={styles.content}>
+{project['project-description']}
+
+    </div>
+
+    <div className={styles.imgContainer}>
+{project.projectimage.map((image, index) => (
+                      
+                      <div key={index} className={styles.row}>
+                      <Image src={image.url} alt={image.alt || `Cover Image ${index + 1}`} width={200} height={0} layout="intrinsic"/>
+                    </div>
+                      
+                    ))}
+</div>
+
+</div>
+
   )
 }

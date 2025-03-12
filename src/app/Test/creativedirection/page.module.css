@@ -60,14 +60,14 @@
   border-radius: 0px;
 }
 
-.album{
+.info{
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
 
-.albumTitle{
+.infoTitle{
   background-color: aliceblue;
   font-weight: 600;
  
