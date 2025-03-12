@@ -30,7 +30,7 @@
    
     font-family:"ABCDiatype";
     font-weight: 600;
-   
+   color: #000;
     justify-content: center;
     font-size: 15px;
     border: 0.7px solid black;
@@ -91,7 +91,7 @@
   .videoTitle{
     background-color: aliceblue;
     font-weight: 600;
-   
+    color: #000;
     font-family:"ABCDiatype";
     font-size: 22px;
     border: 0.5px solid black;
@@ -232,10 +232,13 @@
       left: 50%; /* 从屏幕的中间开始 */ 
       transform: translateX(-50%)  translateY(0%); /* 使容器水平居中 */
       right: auto; /* 取消右对齐 */
-      width: 75vw;
+      width: 95vw;
     }
   
   
     
   }
+
+
+  
   
